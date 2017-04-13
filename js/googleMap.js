@@ -143,7 +143,7 @@ function initMap() {
      }
    });
 
-  //create marker for map, if flagForList is true, then a info window will be showed as soon as the marker is clicked.
+  //create marker for map, if flagForList is true, then a info window will be showed as soon as the list item is clicked.
   // or the info window will only be showed when the marker is clicked.
   function createMarkers (resultList,flagForList) {
     var defaultIcon = makeMarkerIcon('0091ff');
