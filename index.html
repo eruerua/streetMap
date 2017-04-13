@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <title>Find What You Like</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
       html,
       body {
@@ -34,6 +37,7 @@
         height: 100%;
         width: 70%;
       }
+
       #map {
         bottom:0px;
         height: calc(100% - 34px);
@@ -43,17 +47,13 @@
       #maphead{
         background-color: rgba(0,0,0,0.5);
       }
+
       .options-box {
         background-color: rgba(0,0,0,0.7);
         height: 100%;
         line-height: 35px;
         text-align: left;
         width: 30%;
-      }
-
-
-      .text {
-        font-size: 12px;
       }
 
       #search-text {
@@ -75,17 +75,55 @@
         width: 10%;
         fill: #E0E0E0;
       }
+
+      #location {
+        padding-left: 25px;
+      }
+
+      .locationList {
+        margin-bottom: 10px;
+      }
+
+      @media only screen and (max-width: 450px) {
+        h1 {
+          font-size: 12px;
+          padding-top: 5px;
+        }
+
+        #search-text {
+          width: 80%;
+          margin-left: 5%
+        }
+
+        #search-button {
+          width: 50%;
+          margin-left: 25%;
+        }
+
+        .options-box {
+          background-color: rgba(0,0,0,0.7);
+          height: 100%;
+          line-height: 15px;
+          text-align: left;
+          width: 40%;
+        }
+
+        #mapContainer {
+          height: 100%;
+          width: 60%;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="options-box">
-        <h1>Find Your New NYC Home</h1>
+        <h1>Find What You Like</h1>
         <div>
           <input data-bind="value: searchLocation" id="search-text" type="text" placeholder="What do you want?">
-          <input data-bind="click:findLocation" id="search-buttton" type="button" value="Go">
-          <ul id="location-list" data-bind='foreach: resultList'>
-              <li class = 'locationList' data-bind='text:title'></li>
+          <input data-bind="click:findLocation" id="search-button" type="button" value="Go">
+          <ul id="location" data-bind='foreach: resultList'>
+              <li class='locationList' data-bind='text:title'></li>
           </ul>
         </div>
       </div>
@@ -98,19 +136,16 @@
           </a>
         </div>
         <div id="map">
-      </div>
-
-
+        </div>
       </div>
     </div>
-    <script src="lib/knockout-3.4.2.js"></script>
+    <script asyn def src="js/lib/knockout-3.4.2.js"></script>
+    <script asyn def src="js/lib/jquery.min.js"></script>
     <script async defer
         src=
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyCZPwqo4qEO_mjIaHlyjVUClVquPNAW41k&libraries=geometry&v=3&callback=initMap">
     </script>
-    <script asyn defer src="js/hidemenu.js"></script>
     <script asyn def src="js/app.js"></script>
     <script asyn def src="js/googleMap.js"></script>
-
   </body>
 </html>

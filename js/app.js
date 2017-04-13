@@ -26,12 +26,13 @@ var viewModel = function() {
 };
 
 var initLocations = [
-  {title: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
-  {title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
-  {title: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
-  {title: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
-  {title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
-  {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
+  {title: 'Lincoln Center for the Performing Arts', location: {lat: 40.7724641,lng: -73.9834889}},
+  {title: 'Radio City Music Hall', location: {lat: 40.75997599999999, lng: -73.9799772}},
+  {title: 'United Nations Headquarters', location: {lat: 40.7488758, lng: -73.9680091}},
+  {title: 'Gramercy Theatre', location: {lat: 40.7398133, lng: -73.98498169999999}},
+  {title: 'Central Park Zoo', location: {lat: 40.767778, lng: -73.9718335}},
+  {title: 'Empire State Building', location: {lat: 40.7484405, lng: -73.98566439999999}},
+  {title: 'Whitney Museum of American Art', location: {lat: 40.7395877, lng: -74.0088629}}
 ];
 
 
