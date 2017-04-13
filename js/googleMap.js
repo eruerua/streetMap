@@ -105,14 +105,15 @@ var styles = [
 //initMap function
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
-    if(!google.maps) {
-      console.log('ok');
-    }
+    var timer = window.setTimeout('alert("Google map load failure, please try again.")',4000);
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 40.7413549, lng: -73.9980244},
         zoom: 13,
         styles: styles,
         mapTypeControl: false
+    });
+    google.maps.event.addListener(map, 'tilesloaded', function() {
+        window.clearTimeout(timer);
     });
     var bounds = new google.maps.LatLngBounds();
     var largeInfowindow = new google.maps.InfoWindow();
@@ -142,7 +143,6 @@ function initMap() {
        }
      });
 
-
     //create marker for map, if flagForList is true, then a info window will be showed as soon as the marker is clicked.
     // or the info window will only be showed when the marker is clicked.
     function createMarkers (resultList,flagForList) {
@@ -161,13 +161,11 @@ function initMap() {
           animation: google.maps.Animation.DROP,
           id: i
         });
-
         // Push the marker to our array of markers.
         markers.push(marker);
         if (flagForList) {
           populateInfoWindow(marker, largeInfowindow, title);
         }
-
         // Create an onclick event to open an infowindow at each marker.
         marker.addListener('click', function() {
           populateInfoWindow(this, largeInfowindow, title);
@@ -207,7 +205,7 @@ function initMap() {
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
-      }
+    }
 
     //getList from location list
     function getList() {
@@ -233,19 +231,23 @@ function initMap() {
         var title = $(currentList).text();
         $(currentList).click((function(titleCop) {
           return function() {
-            var result = [];
-            for(var i = 0; i< initLocations.length; i++) {
-              if (titleCop == initLocations[i].title) {
-                result.push(initLocations[i]);
+            // var result = [];
+            // for(var i = 0; i< initLocations.length; i++) {
+            //   if (titleCop == initLocations[i].title) {
+            //     result.push(initLocations[i]);
+            //   }
+            // }
+            // hideListings();
+            // createMarkers(result,true);
+            markers.forEach(function(marker) {
+              if(marker.title == titleCop) {
+                marker.setAnimation(google.maps.Animation.DROP);
+                populateInfoWindow(marker, largeInfowindow);
               }
-            }
-            hideListings();
-            createMarkers(result,true);
+            });
           };
         })(title));
       });
-
-
     }
 
     //get wiki links
@@ -269,7 +271,6 @@ function initMap() {
               infowindow.setContent(content);
           }
           });
-
     }
 
     //make marker icon

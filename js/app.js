@@ -1,28 +1,25 @@
+"use strict";
+
 var viewModel = function() {
-    var self = this;
-    this.locationList = [];
-    this.resultList = ko.observableArray();
-    this.searchLocation = ko.observable();
-    this.locationList = initLocations;
-    this.resultList(this.locationList);
-    this.findLocation =function() {
-        var list = [];
-        if(self.searchLocation()) {
-            console.log(self.searchLocation());
-            initLocations.forEach(function(item) {
-                if(item.title.toLowerCase().match(self.searchLocation().toLowerCase())) {
-                    list.push(item);
-                }
-            });
-            console.log(list);
-            self.resultList(list);
-        } else {
-            self.resultList(self.locationList);
-        }
-
-    };
-
-
+  var self = this;
+  this.locationList = [];
+  this.resultList = ko.observableArray();
+  this.searchLocation = ko.observable();
+  this.locationList = initLocations;
+  this.resultList(this.locationList);
+  this.findLocation =function() {
+      var list = [];
+      if(self.searchLocation()) {
+          initLocations.forEach(function(item) {
+              if(item.title.toLowerCase().match(self.searchLocation().toLowerCase())) {
+                  list.push(item);
+              }
+          });
+          self.resultList(list);
+      } else {
+          self.resultList(self.locationList);
+      }
+  };
 };
 
 var initLocations = [
@@ -34,12 +31,5 @@ var initLocations = [
   {title: 'Empire State Building', location: {lat: 40.7484405, lng: -73.98566439999999}},
   {title: 'Whitney Museum of American Art', location: {lat: 40.7395877, lng: -74.0088629}}
 ];
-
-
-
-
-
-
-
 
 ko.applyBindings(new viewModel());
