@@ -138,6 +138,7 @@ function initMap() {
       } else {
         mapContainer.css("width","70%");
         drawer.css("display", "block" );
+        google.maps.event.trigger(map, 'resize');
        }
      });
 
