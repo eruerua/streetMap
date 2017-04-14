@@ -2,15 +2,7 @@
 
 var map;
 var markers = [];
-var initLocations = [
-  {title: 'Lincoln Center for the Performing Arts', location: {lat: 40.7724641,lng: -73.9834889}},
-  {title: 'Radio City Music Hall', location: {lat: 40.75997599999999, lng: -73.9799772}},
-  {title: 'United Nations Headquarters', location: {lat: 40.7488758, lng: -73.9680091}},
-  {title: 'Gramercy Theatre', location: {lat: 40.7398133, lng: -73.98498169999999}},
-  {title: 'Central Park Zoo', location: {lat: 40.767778, lng: -73.9718335}},
-  {title: 'Empire State Building', location: {lat: 40.7484405, lng: -73.98566439999999}},
-  {title: 'Whitney Museum of American Art', location: {lat: 40.7395877, lng: -74.0088629}}
-];
+
 //change another styles for map
 var styles = [
     {
@@ -119,11 +111,14 @@ function initMap() {
   var largeInfowindow = new google.maps.InfoWindow();
   createMarkers(initLocations,false);
   listEvent();
-  $('#search-button').click(function() {
-    var resultList = getList();
-    hideListings();
-    createMarkers(resultList,false);
-    listEvent();
+  var resultList = [];
+  $('#search-text').on('input',function() {
+    if (getList().toString() !== resultList.toString()) {
+      resultList = getList();
+      hideListings();
+      createMarkers(resultList,false);
+      listEvent();
+    }
   });
 
   // hide and resize map when click hide menu

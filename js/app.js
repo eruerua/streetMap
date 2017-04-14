@@ -2,24 +2,35 @@
 
 var viewModel = function() {
   var self = this;
-  this.locationList = [];
-  this.resultList = ko.observableArray();
-  this.searchLocation = ko.observable();
-  this.locationList = initLocations;
-  this.resultList(this.locationList);
-  this.findLocation =function() {
-      var list = [];
-      if(self.searchLocation()) {
-          initLocations.forEach(function(item) {
-              if(item.title.toLowerCase().match(self.searchLocation().toLowerCase())) {
-                  list.push(item);
-              }
-          });
-          self.resultList(list);
-      } else {
-          self.resultList(self.locationList);
-      }
-  };
+  this.locationList = ko.observableArray(initLocations);
+  this.filterKeyword = ko.observable('');
+  this.filterLocation = ko.computed(function() {
+    if(!self.filterKeyword()) {
+      return self.locationList();
+    } else {
+      return ko.utils.arrayFilter(self.locationList(),function(location) {
+        var title = location.title.toLowerCase().indexOf(self.filterKeyword().toLowerCase()) !== -1;
+        return title;
+      });
+    }
+  });
+  // this.resultList = ko.observableArray();
+  // this.searchLocation = ko.observable();
+  // this.locationList = initLocations;
+  // this.resultList(this.locationList);
+  // this.findLocation =function() {
+  //     var list = [];
+  //     if(self.filterKeyword() {
+  //         initLocations.forEach(function(item) {
+  //             if(item.title.toLowerCase().match(self.searchLocation().toLowerCase())) {
+  //                 list.push(item);
+  //             }
+  //         });
+  //         self.resultList(list);
+  //     } else {
+  //         self.resultList(self.locationList);
+  //     }
+  // };
 };
 
 var initLocations = [
